@@ -2,8 +2,8 @@
 import { useState } from "react";
 
 export default function Page() {
-  const fullName = "Sanjana";
-  const nickname = "Sanj";
+  const fullName = "Rutuja";
+  const nickname = "Rutu";
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const [selections, setSelections] = useState<Record<string, string | null>>({});
