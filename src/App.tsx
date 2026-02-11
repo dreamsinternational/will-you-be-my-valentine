@@ -20,9 +20,9 @@ export default function Page() {
       title: "Select your Gift",
       subtitle: "Pick one or more for your Valentine haul.",
       options: [
-        "A bouquet of pink roses",
-        "A cozy hoodie date",
-        "Handwritten love letter",
+        "Apple Headphones",
+        "Customized Name Necklace",
+        "Handwritten Letter",
         "Chocolate + strawberries",
         "A surprise candlelight dinner",
       ],
@@ -35,10 +35,10 @@ export default function Page() {
       subtitle: "Playful, sweet, and a little spicy.",
       options: [
         "5 kisses in 10 seconds",
-        "Slow dance in the kitchen",
+        "Kiss me in the best way you can do.",
         "Whisper your favorite memory",
-        "Back massage for 10 minutes",
-        "Pick a secret nickname",
+        "Pin me against the wall and show me who’s in charge.",
+        "Give me a slow, lingering kiss and don’t stop until I say so.",
       ],
       icons: ["🔥", "😈", "💋", "🎯", "🫦", "💫"],
       mode: "mystery",
@@ -58,33 +58,53 @@ export default function Page() {
       mode: "mystery",
     },
     {
-      id: "playlist",
-      title: "Our Playlist",
-      subtitle: "Select a mood for the soundtrack.",
-      options: [
-        "Soft R&B",
-        "Throwback love songs",
-        "Chill lo-fi",
-        "Upbeat pop",
-        "Indie romance",
-      ],
-      icons: ["🎧", "🎶", "📻", "🪩", "🎹", "✨"],
-      mode: "mystery",
-    },
-    {
-      id: "punishment",
-      title: "Pick a Romantic Punishment",
-      subtitle: "Cute consequences, all heart.",
-      options: [
-        "You owe me 10 slow kisses",
-        "Write a tiny love note",
-        "Two-minute shoulder massage",
-        "Sing a silly love line",
-        "Make me a sweet treat",
-      ],
-      icons: ["💞", "✍️", "💆", "🎤", "🧁", "💫"],
-      mode: "select",
-    },
+  id: "dangerous_compliment",
+  title: "Press for a Dangerous Compliment",
+  subtitle: "Warning: May cause blushing.",
+  options: [
+    "You have no idea how hard it is to keep my hands to myself around you.",
+    "The way you look at me should honestly be illegal.",
+    "If tension had a face, it would look exactly like you.",
+    "You don’t just enter a room… you take control of it.",
+    "Sometimes I replay our moments in my head just to feel that spark again.",
+    "You’re the kind of distraction I never want to recover from.",
+    "When you stand close to me, my thoughts stop behaving.",
+    "You make ‘good girl’ energy feel dangerously tempting."
+  ],
+  icons: ["🔥", "💋", "😈", "✨", "💞", "🫦"],
+  mode: "select",
+},
+
+    // {
+    //   id: "playlist",
+    //   title: "Our Playlist",
+    //   subtitle: "Select a mood for the soundtrack.",
+    //   options: [
+    //     "Soft R&B",
+    //     "Throwback love songs",
+    //     "Chill lo-fi",
+    //     "Upbeat pop",
+    //     "Indie romance",
+    //   ],
+    //   icons: ["🎧", "🎶", "📻", "🪩", "🎹", "✨"],
+    //   mode: "mystery",
+    // },
+   {
+  id: "punishment",
+  title: "Pick a Romantic Punishment",
+  subtitle: "Cute consequences, all heart.",
+  options: [
+    "You owe me 10 slow, unhurried kisses.",
+    "Write me a tiny love note… and read it out loud.",
+    "Two-minute shoulder massage with no distractions.",
+    "Sing one cheesy love line while looking into my eyes.",
+    "Make me a sweet treat… and feed me the entire treat with your hands.",
+    "One long hug that lasts just a little too long."
+  ],
+  icons: ["💞", "✍️", "💆", "🎤", "🧁", "🤍"],
+  mode: "select",
+},
+
     {
       id: "fantasy",
       title: "Select Your 60-Second Fantasy",
@@ -113,9 +133,8 @@ export default function Page() {
         "A Slow Kiss",
         "Recreate Our Favorite Memory",
         "1 Minute Eye Contact Challenge",
-        "Double Reward (Spin Again 😉)",
       ],
-      icons: ["💞", "✨", "🫶", "🎶", "💌", "📅", "💋", "📸", "👀", "🎡"],
+      icons: ["💞", "✨", "🫶", "🎶", "💌", "📅", "💋", "📸", "👀"],
       mode: "wheel",
     },
     {
@@ -124,7 +143,7 @@ export default function Page() {
       subtitle: "Pick your hug style.",
       options: [
         "60-second bear hug",
-        "Back hug from behind",
+        "Back hug with gentle squeezes",
         "Spin + squeeze hug",
         "Couch cuddle hug",
         "Hug + forehead kiss",
@@ -168,7 +187,7 @@ export default function Page() {
       "Pretty please",
       "With a chocolate rice cake on top",
       "What about a matcha frostie",
-      "PLEASE POOKIE",
+      "PLEASE Babe",
       "But :*(",
       "I am going to die",
       "Yep im dead",
@@ -190,7 +209,7 @@ export default function Page() {
           {!hasStarted ? (
             <>
               <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
-              <div className="my-4 text-4xl font-bold">WOOOOOO!!! I love you pookie!! ;))</div>
+              <div className="my-4 text-4xl font-bold">WOOOOOO !!! I love you Babe!! ;))</div>
               <button
                 onClick={() => setHasStarted(true)}
                 className="mt-4 rounded-full bg-pink-500 px-6 py-3 text-lg font-semibold text-white shadow-lg transition hover:bg-pink-600"
