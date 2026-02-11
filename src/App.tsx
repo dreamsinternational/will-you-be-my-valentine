@@ -38,9 +38,9 @@ export default function Page() {
       options: [
         "5 kisses in 10 seconds",
         "Kiss me in the best way you can do.",
-        "Whisper your favorite memory",
         "Pin me against the wall and show me who’s in charge.",
-        "Give me a slow, lingering kiss and don’t stop until I say so.",
+        "Give me a slow, lingering kiss and don’t stop until I say so. Over my entire body.",
+        "Rub your boobs all over my face for 60 seconds.",
       ],
       icons: ["🔥", "😈", "💋", "🎯", "🫦", "💫"],
       mode: "mystery",
