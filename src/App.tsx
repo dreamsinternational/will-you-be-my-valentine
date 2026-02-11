@@ -273,19 +273,21 @@ export default function Page() {
                       <div className="love-wheel">
                         <div className="love-wheel__pointer" />
                         <div
-                          className={`love-wheel__body ${isSpinning ? "is-spinning" : ""}`}
+                          className={`love-wheel__spin ${isSpinning ? "is-spinning" : ""}`}
                           style={{ transform: `rotate(${wheelAngle}deg)` }}
                         >
                           <div className="love-wheel__ring" />
                           {activeStep.options.map((option, index) => {
                             const angle = (360 / activeStep.options.length) * index;
+                            const labelStyle = {
+                              "--label-angle": `${angle}deg`,
+                              "--wheel-rotation": `${wheelAngle}deg`,
+                            } as React.CSSProperties;
                             return (
                               <div
                                 key={option}
                                 className={`love-wheel__label ${wheelResult === option ? "is-hit" : ""}`}
-                                style={{
-                                  transform: `rotate(${angle}deg) translateY(calc(-1 * var(--wheel-radius))) rotate(-${angle}deg)`,
-                                }}
+                                style={labelStyle}
                               >
                                 {option}
                               </div>

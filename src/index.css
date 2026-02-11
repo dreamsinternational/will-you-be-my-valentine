@@ -40,7 +40,7 @@
     }
 }
 
-.love-wheel__body {
+.love-wheel__spin {
     position: absolute;
     inset: 0;
     display: grid;
@@ -93,6 +93,11 @@
     text-align: center;
     box-shadow: 0 10px 20px rgba(251, 113, 133, 0.18);
     transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    transform:
+        rotate(var(--label-angle))
+        translateY(calc(-1 * var(--wheel-radius)))
+        rotate(calc(-1 * var(--label-angle)))
+        rotate(calc(-1 * var(--wheel-rotation)));
 }
 
 .love-wheel__label.is-hit {
@@ -101,14 +106,6 @@
     transform: scale(1.05);
 }
 
-@keyframes wheel-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(1080deg);
-    }
-}
 
 
 /* :root {
