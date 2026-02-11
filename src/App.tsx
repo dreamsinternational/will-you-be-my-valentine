@@ -24,6 +24,7 @@ export default function Page() {
         "A surprise candlelight dinner",
       ],
       icons: ["🎁", "💌", "🌹", "🍫", "🧸", "✨"],
+      mode: "mystery",
     },
     {
       id: "dares",
@@ -37,6 +38,7 @@ export default function Page() {
         "Pick a secret nickname",
       ],
       icons: ["🔥", "😈", "💋", "🎯", "🫦", "💫"],
+      mode: "mystery",
     },
     {
       id: "date",
@@ -50,6 +52,7 @@ export default function Page() {
         "Adventure day + ice cream",
       ],
       icons: ["🎬", "☕", "🧺", "🍳", "🍦", "📸"],
+      mode: "mystery",
     },
     {
       id: "playlist",
@@ -63,15 +66,77 @@ export default function Page() {
         "Indie romance",
       ],
       icons: ["🎧", "🎶", "📻", "🪩", "🎹", "✨"],
+      mode: "mystery",
+    },
+    {
+      id: "punishment",
+      title: "Pick a Romantic Punishment",
+      subtitle: "Cute consequences, all heart.",
+      options: [
+        "You owe me 10 slow kisses",
+        "Write a tiny love note",
+        "Two-minute shoulder massage",
+        "Sing a silly love line",
+        "Make me a sweet treat",
+      ],
+      icons: ["💞", "✍️", "💆", "🎤", "🧁", "💫"],
+      mode: "select",
+    },
+    {
+      id: "fantasy",
+      title: "Select Your 60-Second Fantasy",
+      subtitle: "One minute of pure romance.",
+      options: [
+        "Slow dance with eyes closed",
+        "Compliment marathon",
+        "Forehead kisses only",
+        "Hand-holding + eye contact",
+        "Whisper 3 things you love",
+      ],
+      icons: ["🕺", "💬", "💋", "🤝", "💌", "✨"],
+      mode: "select",
+    },
+    {
+      id: "wheel",
+      title: "Spin the Love Wheel",
+      subtitle: "One spin decides the vibe.",
+      options: [
+        "Sunset walk",
+        "Dessert run",
+        "Movie night",
+        "Coffee date",
+        "Game night",
+        "Picnic moment",
+      ],
+      icons: ["🌙", "🍰", "🎬", "☕", "🎲", "🧺"],
+      mode: "wheel",
+    },
+    {
+      id: "hug",
+      title: "Claim Your Hug Coupon",
+      subtitle: "Pick your hug style.",
+      options: [
+        "60-second bear hug",
+        "Back hug from behind",
+        "Spin + squeeze hug",
+        "Couch cuddle hug",
+        "Hug + forehead kiss",
+      ],
+      icons: ["🐻", "🫶", "🌀", "🛋️", "💋", "💖"],
+      mode: "select",
     },
   ];
 
-  const revealMysteryPick = (stepId: string, options: string[], icons: string[]) => {
-    const pick = options[Math.floor(Math.random() * options.length)];
-    const icon = icons[Math.floor(Math.random() * icons.length)];
+  const revealPick = (stepId: string, pick: string, icon: string) => {
     setSelections((prev) => ({ ...prev, [stepId]: pick }));
     setLastReveal({ text: pick, icon });
     setIsRevealOpen(true);
+  };
+
+  const revealRandomPick = (stepId: string, options: string[], icons: string[]) => {
+    const pick = options[Math.floor(Math.random() * options.length)];
+    const icon = icons[Math.floor(Math.random() * icons.length)];
+    revealPick(stepId, pick, icon);
   };
 
   const allComplete = hasStarted && currentStepIndex >= steps.length;
@@ -127,7 +192,7 @@ export default function Page() {
           ) : null}
           {hasStarted && !allComplete ? (
             <div className="mb-8 max-w-2xl text-center text-lg text-slate-600">
-              Mystery choices are hidden. Pick one, reveal your surprise, then move to the next task.
+              Choose your surprise, reveal it, then move to the next task.
             </div>
           ) : null}
           {hasStarted && isRevealOpen && lastReveal ? (
@@ -194,21 +259,49 @@ export default function Page() {
                       Step {currentStepIndex + 1}
                     </div>
                   </div>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                    {activeStep.options.map((_, index) => (
+                  {activeStep.mode === "wheel" ? (
+                    <div className="mt-6 flex flex-col items-center gap-4">
+                      <div className="flex h-40 w-40 items-center justify-center rounded-full border-4 border-dashed border-rose-300 bg-white text-4xl">
+                        🎡
+                      </div>
                       <button
-                        key={`${activeStep.id}-${index}`}
-                        onClick={() => revealMysteryPick(activeStep.id, activeStep.options, activeStep.icons)}
-                        className="flex items-center justify-between rounded-2xl border border-pink-200 bg-white px-4 py-4 text-left text-sm font-semibold text-slate-700 transition hover:border-pink-400"
+                        onClick={() => revealRandomPick(activeStep.id, activeStep.options, activeStep.icons)}
+                        className="rounded-full bg-rose-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-rose-600"
                       >
-                        <span>Mystery pick #{index + 1}</span>
-                        <span className="text-xl">{activeStep.icons[index % activeStep.icons.length]}</span>
+                        Spin the Love Wheel
                       </button>
-                    ))}
-                  </div>
-                  <div className="mt-4 text-sm text-slate-600">
-                    Tap any mystery choice to reveal your Valentine surprise.
-                  </div>
+                      <div className="text-sm text-slate-600">One spin decides the vibe.</div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                        {activeStep.options.map((option, index) => {
+                          const icon = activeStep.icons[index % activeStep.icons.length];
+                          const label =
+                            activeStep.mode === "mystery" ? `Mystery pick #${index + 1}` : option;
+                          const handleClick =
+                            activeStep.mode === "mystery"
+                              ? () => revealRandomPick(activeStep.id, activeStep.options, activeStep.icons)
+                              : () => revealPick(activeStep.id, option, icon);
+                          return (
+                            <button
+                              key={`${activeStep.id}-${index}`}
+                              onClick={handleClick}
+                              className="flex items-center justify-between rounded-2xl border border-pink-200 bg-white px-4 py-4 text-left text-sm font-semibold text-slate-700 transition hover:border-pink-400"
+                            >
+                              <span>{label}</span>
+                              <span className="text-xl">{icon}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <div className="mt-4 text-sm text-slate-600">
+                        {activeStep.mode === "mystery"
+                          ? "Tap any mystery choice to reveal your Valentine surprise."
+                          : "Pick your favorite to reveal the surprise."}
+                      </div>
+                    </>
+                  )}
                 </div>
               ) : null}
             </div>
