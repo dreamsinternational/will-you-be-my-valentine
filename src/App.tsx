@@ -60,6 +60,21 @@ export default function Page() {
       mode: "mystery",
     },
     {
+      id: "cozy_ritual",
+      title: `Choose a Cozy Ritual, ${nickname}`,
+      subtitle: "If you wanted to start a cozy ritual with me, what would it be?",
+      options: [
+        "Secret morning good-morning texts ☀️💬",
+        "Secret code word only we understand 🔐❤️",
+        "Weekend movie cuddle",
+        "Sunset photo exchange ritual 🌅📷",
+        "Bedtime story swaps",
+        "Midday ‘thinking of you’ voice notes 🎧💛",
+      ],
+      icons: ["🥞", "🍵", "🎬", "🌙", "📖", "✨"],
+      mode: "select",
+    },
+    {
   id: "promise_question",
   title: `Your Promise, ${nickname}`,
   subtitle: `If you could get *one promise* from me, what would it be, ${nickname}?`,
