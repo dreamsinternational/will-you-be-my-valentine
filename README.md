@@ -41,4 +41,8 @@ pnpm run dev
 pnpm run deploy
 ```
 
+# Reporting Issues
+
+You can report issues directly at saurabh@agnt.dev
+
 Made with ❤️ in Berlin!
