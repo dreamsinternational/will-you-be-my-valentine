@@ -2,6 +2,8 @@
 import { useState } from "react";
 
 export default function Page() {
+  const fullName = "Sanjana";
+  const nickname = "Sanj";
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const [selections, setSelections] = useState<Record<string, string | null>>({});
@@ -17,7 +19,7 @@ export default function Page() {
   const steps = [
     {
       id: "gift",
-      title: "Select your Gift",
+      title: `Select your Gift, ${nickname}`,
       subtitle: "Pick one or more for your Valentine haul.",
       options: [
         "Apple Headphones",
@@ -31,7 +33,7 @@ export default function Page() {
     },
     {
       id: "dares",
-      title: "Naughty Dares",
+      title: `Naughty Dares for ${nickname}`,
       subtitle: "Playful, sweet, and a little spicy.",
       options: [
         "5 kisses in 10 seconds",
@@ -45,7 +47,7 @@ export default function Page() {
     },
     {
       id: "date",
-      title: "Choose the Date Vibe",
+      title: `Choose the Date Vibe, ${nickname}`,
       subtitle: "What energy are we bringing?",
       options: [
         "Movie night + snacks",
@@ -58,8 +60,26 @@ export default function Page() {
       mode: "mystery",
     },
     {
+  id: "promise_question",
+  title: `Your Promise, ${nickname}`,
+  subtitle: `If you could get *one promise* from me, what would it be, ${nickname}?`,
+  options: [
+    "Always be honest with you, no matter what.",
+    "Support you in every dream you chase.",
+    "Stand by you through all ups and downs.",
+    "Make our love a safe and happy place.",
+    "Cherish you every day for the rest of our lives.",
+    "Grow with you, not apart, through everything.",
+    "Keep choosing you, over and over again.",
+    "Love you fiercely, forever and without hesitation.",
+    "All of the above."
+  ],
+  icons: ["🤍","🌟","💪","🏡","❤️","🌱","🔁","💌"],
+  mode: "select"
+},
+    {
   id: "dangerous_compliment",
-  title: "Press for a Dangerous Compliment",
+  title: `Press for a Dangerous Compliment, ${nickname}`,
   subtitle: "Warning: May cause blushing.",
   options: [
     "You have no idea how hard it is to keep my hands to myself around you.",
@@ -91,7 +111,7 @@ export default function Page() {
     // },
    {
   id: "punishment",
-  title: "Pick a Romantic Punishment",
+  title: `Pick a Romantic Punishment, ${nickname}`,
   subtitle: "Cute consequences, all heart.",
   options: [
     "You owe me 10 slow, unhurried kisses.",
@@ -107,7 +127,7 @@ export default function Page() {
 
     {
       id: "fantasy",
-      title: "Select Your 60-Second Fantasy",
+      title: `Select Your 60-Second Fantasy, ${nickname}`,
       subtitle: "One minute of pure romance.",
       options: [
         "Slow dance with eyes closed",
@@ -121,7 +141,7 @@ export default function Page() {
     },
     {
       id: "wheel",
-      title: "Spin the Love Wheel",
+      title: `Spin the Love Wheel, ${nickname}`,
       subtitle: "One spin decides the vibe.",
       options: [
         "5 Kisses Anywhere",
@@ -139,7 +159,7 @@ export default function Page() {
     },
     {
       id: "hug",
-      title: "Claim Your Hug Coupon",
+      title: `Claim Your Hug Coupon, ${nickname}`,
       subtitle: "Pick your hug style.",
       options: [
         "60-second bear hug",
@@ -209,7 +229,7 @@ export default function Page() {
           {!hasStarted ? (
             <>
               <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
-              <div className="my-4 text-4xl font-bold">WOOOOOO !!! I love you Babe!! ;))</div>
+              <div className="my-4 text-4xl font-bold">WOOOOOO !!! I love you, {nickname}!! ;))</div>
               <button
                 onClick={() => setHasStarted(true)}
                 className="mt-4 rounded-full bg-pink-500 px-6 py-3 text-lg font-semibold text-white shadow-lg transition hover:bg-pink-600"
@@ -238,38 +258,38 @@ export default function Page() {
           ) : null}
           {allComplete ? (
             <div className="w-full max-w-6xl px-4">
-              <div className="min-h-[70vh] rounded-[32px] border border-rose-200 bg-gradient-to-br from-rose-100 via-white to-pink-200 p-8 text-left shadow-xl sm:p-12">
+              <div className="rounded-[24px] border border-rose-200 bg-gradient-to-br from-rose-100 via-white to-pink-200 p-4 text-left shadow-xl sm:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-[0.4em] text-rose-500">
-                      Final Valentine Plan
+                      Final Valentine Plan for {fullName}
                     </div>
-                    <h2 className="mt-3 text-4xl font-extrabold text-rose-700 sm:text-5xl">
-                      All surprises unlocked
+                    <h2 className="mt-2 text-3xl font-extrabold text-rose-700 sm:text-4xl">
+                      All surprises unlocked for {nickname}
                     </h2>
-                    <p className="mt-3 max-w-2xl text-lg text-rose-600">
-                      Here is everything you revealed, wrapped up in one gorgeous plan.
+                    <p className="mt-2 max-w-2xl text-base text-rose-600">
+                      Here is everything you revealed, wrapped up in one gorgeous plan for {nickname}.
                     </p>
                   </div>
                   <div className="text-4xl">🎉💖</div>
                 </div>
-                <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {steps.map((step) => (
                     <div
                       key={step.id}
-                      className="rounded-3xl border border-rose-100 bg-white/80 p-6 shadow-sm"
+                      className="rounded-2xl border border-rose-100 bg-white/80 p-4 shadow-sm"
                     >
                       <div className="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
                         {step.title}
                       </div>
-                      <div className="mt-4 text-2xl font-bold text-slate-800">
+                      <div className="mt-3 text-xl font-bold text-slate-800">
                         {selections[step.id] ?? ""}
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-8 rounded-2xl bg-rose-200/70 p-5 text-center text-lg font-semibold text-rose-700">
-                  Valentine complete! You just made the cutest plan ever. 💖
+                <div className="mt-6 rounded-2xl bg-rose-200/70 p-4 text-center text-base font-semibold text-rose-700">
+                  Valentine complete! You just made the cutest plan ever, {nickname}. 💖
                 </div>
               </div>
             </div>
@@ -366,11 +386,11 @@ export default function Page() {
                           );
                         })}
                       </div>
-                      <div className="mt-4 text-sm text-slate-600">
-                        {activeStep.mode === "mystery"
-                          ? "Tap any mystery choice to reveal your Valentine surprise."
-                          : "Pick your favorite to reveal the surprise."}
-                      </div>
+                      {activeStep.mode === "mystery" ? (
+                        <div className="mt-4 text-sm text-slate-600">
+                          Tap any mystery choice to reveal your Valentine surprise.
+                        </div>
+                      ) : null}
                     </>
                   )}
                 </div>
@@ -384,7 +404,7 @@ export default function Page() {
             className="h-[200px]"
             src="https://gifdb.com/images/high/hello-animated-milk-and-mocha-mad-poke-wczos5085dw6qo6c.webp"
           />
-          <h1 className="my-4 text-4xl">Will you be my Valentine?</h1>
+          <h1 className="my-4 text-4xl">Will you be my Valentine, {fullName}?</h1>
           <div className="flex items-center">
             <button
               className={`mr-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700`}
