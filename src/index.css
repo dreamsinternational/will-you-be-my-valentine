@@ -23,6 +23,94 @@
     }
 }
 
+.love-wheel {
+    position: relative;
+    width: min(86vw, 360px);
+    height: min(86vw, 360px);
+    display: grid;
+    place-items: center;
+    --wheel-radius: 145px;
+}
+
+@media (min-width: 640px) {
+    .love-wheel {
+        width: 420px;
+        height: 420px;
+        --wheel-radius: 170px;
+    }
+}
+
+.love-wheel__body {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.love-wheel__ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+        #fecdd3 0deg,
+        #fda4af 36deg,
+        #fbcfe8 72deg,
+        #fda4af 108deg,
+        #ffe4e6 144deg,
+        #fda4af 180deg,
+        #fecdd3 216deg,
+        #fbcfe8 252deg,
+        #fda4af 288deg,
+        #ffe4e6 324deg
+    );
+    border: 8px solid #fb7185;
+    box-shadow: 0 18px 40px rgba(244, 63, 94, 0.25);
+}
+
+.love-wheel__pointer {
+    position: absolute;
+    top: -14px;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 22px solid #fb7185;
+    filter: drop-shadow(0 6px 8px rgba(244, 63, 94, 0.35));
+    z-index: 2;
+}
+
+.love-wheel__label {
+    position: absolute;
+    width: 120px;
+    min-height: 56px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 10px 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #9f1239;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(251, 113, 133, 0.18);
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.love-wheel__label.is-hit {
+    background: #fff1f2;
+    box-shadow: 0 14px 26px rgba(244, 63, 94, 0.25);
+    transform: scale(1.05);
+}
+
+@keyframes wheel-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(1080deg);
+    }
+}
+
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

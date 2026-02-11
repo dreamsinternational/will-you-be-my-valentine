@@ -9,6 +9,9 @@ export default function Page() {
   const [hasStarted, setHasStarted] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isRevealOpen, setIsRevealOpen] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [wheelResult, setWheelResult] = useState<string | null>(null);
+  const [wheelAngle, setWheelAngle] = useState(0);
   const yesButtonSize = noCount * 20 + 16;
 
   const steps = [
@@ -101,14 +104,18 @@ export default function Page() {
       title: "Spin the Love Wheel",
       subtitle: "One spin decides the vibe.",
       options: [
-        "Sunset walk",
-        "Dessert run",
-        "Movie night",
-        "Coffee date",
-        "Game night",
-        "Picnic moment",
+        "5 Kisses Anywhere",
+        "One Honest Question (must answer truthfully)",
+        "Instant Hug Attack",
+        "You Choose the Song, I Dance",
+        "Secret Compliment",
+        "Plan Our Next Date",
+        "A Slow Kiss",
+        "Recreate Our Favorite Memory",
+        "1 Minute Eye Contact Challenge",
+        "Double Reward (Spin Again 😉)",
       ],
-      icons: ["🌙", "🍰", "🎬", "☕", "🎲", "🧺"],
+      icons: ["💞", "✨", "🫶", "🎶", "💌", "📅", "💋", "📸", "👀", "🎡"],
       mode: "wheel",
     },
     {
@@ -130,6 +137,7 @@ export default function Page() {
   const revealPick = (stepId: string, pick: string, icon: string) => {
     setSelections((prev) => ({ ...prev, [stepId]: pick }));
     setLastReveal({ text: pick, icon });
+    setWheelResult(null);
     setIsRevealOpen(true);
   };
 
@@ -144,6 +152,7 @@ export default function Page() {
   const advanceStep = () => {
     setIsRevealOpen(false);
     setLastReveal(null);
+    setWheelResult(null);
     setCurrentStepIndex((prev) => prev + 1);
   };
 
@@ -175,7 +184,7 @@ export default function Page() {
   };
 
   return (
-    <div className="-mt-16 flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center py-10">
       {yesPressed ? (
         <>
           {!hasStarted ? (
@@ -261,16 +270,57 @@ export default function Page() {
                   </div>
                   {activeStep.mode === "wheel" ? (
                     <div className="mt-6 flex flex-col items-center gap-4">
-                      <div className="flex h-40 w-40 items-center justify-center rounded-full border-4 border-dashed border-rose-300 bg-white text-4xl">
-                        🎡
+                      <div className="love-wheel">
+                        <div className="love-wheel__pointer" />
+                        <div
+                          className={`love-wheel__body ${isSpinning ? "is-spinning" : ""}`}
+                          style={{ transform: `rotate(${wheelAngle}deg)` }}
+                        >
+                          <div className="love-wheel__ring" />
+                          {activeStep.options.map((option, index) => {
+                            const angle = (360 / activeStep.options.length) * index;
+                            return (
+                              <div
+                                key={option}
+                                className={`love-wheel__label ${wheelResult === option ? "is-hit" : ""}`}
+                                style={{
+                                  transform: `rotate(${angle}deg) translateY(calc(-1 * var(--wheel-radius))) rotate(-${angle}deg)`,
+                                }}
+                              >
+                                {option}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                       <button
-                        onClick={() => revealRandomPick(activeStep.id, activeStep.options, activeStep.icons)}
+                        onClick={() => {
+                          if (isSpinning) return;
+                          setWheelResult(null);
+                          setIsSpinning(true);
+                          const pickIndex = Math.floor(Math.random() * activeStep.options.length);
+                          const pick = activeStep.options[pickIndex];
+                          const icon = activeStep.icons[pickIndex % activeStep.icons.length];
+                          const sliceAngle = 360 / activeStep.options.length;
+                          const centerAngle = pickIndex * sliceAngle + sliceAngle / 2;
+                          const extraSpins = 3 + Math.floor(Math.random() * 3);
+                          const targetAngle = wheelAngle + extraSpins * 360 - centerAngle;
+                          setWheelAngle(targetAngle);
+                          setTimeout(() => {
+                            setIsSpinning(false);
+                            setWheelResult(pick);
+                            setTimeout(() => {
+                              revealPick(activeStep.id, pick, icon);
+                            }, 2000);
+                          }, 900);
+                        }}
                         className="rounded-full bg-rose-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-rose-600"
                       >
                         Spin the Love Wheel
                       </button>
-                      <div className="text-sm text-slate-600">One spin decides the vibe.</div>
+                      <div className="text-sm text-slate-600">
+                        {wheelResult ? "Wheel stopped... revealing next!" : "One spin decides the vibe."}
+                      </div>
                     </div>
                   ) : (
                     <>
